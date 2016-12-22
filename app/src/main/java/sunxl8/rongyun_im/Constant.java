@@ -7,8 +7,8 @@ package sunxl8.rongyun_im;
 public class Constant {
 
     public static final String BASE_URL_LEANCLOUD = "https://leancloud.cn/1.1/";
-    public static final String LEAN_CLOUD_ID = "1easqLxsHBENYgL5NtmNDCjE-gzGzoHsz";
-    public static final String LEAN_CLOUD_KEY = "w9D9S3qFO973qntytibgHec6";
+    public static final String LEAN_CLOUD_ID = "qVSYnTWFJ9TlcsqABFpAFpHG-gzGzoHsz";
+    public static final String LEAN_CLOUD_KEY = "QJcyshJMqPWXKRBqkXSNLwe1";
 
     public static final String SP_USER = "sp_user";
     public static final String SP_USER_ACCOUNT_KEY = "sp_user_account";

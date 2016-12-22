@@ -103,6 +103,7 @@ public class RegisterActivity extends ImBaseSwipeBackActivity {
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
                         RxBus.getInstance().post(new DestroySplashEvent());
+                        finish();
                     }
                 }, new LeanCloudExceptionEngine() {
                     @Override
