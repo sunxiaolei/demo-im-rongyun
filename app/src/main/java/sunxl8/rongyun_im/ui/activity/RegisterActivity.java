@@ -13,14 +13,16 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import rx.Subscriber;
+import rx.functions.Action1;
 import sunxl8.android_lib.utils.RegexUtils;
 import sunxl8.android_lib.utils.RxBus;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseSwipeBackActivity;
+import sunxl8.rongyun_im.entity.LeanCloudException;
 import sunxl8.rongyun_im.entity.RegisterEntityRequest;
 import sunxl8.rongyun_im.entity.RegisterEntityResponse;
 import sunxl8.rongyun_im.event.DestroySplashEvent;
+import sunxl8.rongyun_im.network.LeanCloudExceptionEngine;
 import sunxl8.rongyun_im.network.LeanCloudRequest;
 
 /**
@@ -94,24 +96,19 @@ public class RegisterActivity extends ImBaseSwipeBackActivity {
         entityRequest.setPassword(password);
         LeanCloudRequest.doRegister(entityRequest)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new Subscriber<RegisterEntityResponse>() {
+                .subscribe(new Action1<RegisterEntityResponse>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        dismissDialog();
-                        showDialog(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(RegisterEntityResponse response) {
+                    public void call(RegisterEntityResponse response) {
                         dismissDialog();
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
                         RxBus.getInstance().post(new DestroySplashEvent());
+                    }
+                }, new LeanCloudExceptionEngine() {
+                    @Override
+                    public void call(LeanCloudException entity) {
+                        dismissDialog();
+                        showDialog(entity.getError());
                     }
                 });
     }
