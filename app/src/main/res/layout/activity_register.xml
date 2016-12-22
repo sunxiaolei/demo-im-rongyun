@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="80dp">
 
         <ImageView
             android:id="@+id/iv_register_headportrait"
@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/iv_register_headportrait"
             android:hint="输入昵称"
+            android:maxLength="7"
             android:minHeight="50dp"/>
 
     </RelativeLayout>
@@ -33,24 +34,28 @@
         android:id="@+id/et_register_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="输入账号"
+        android:layout_marginTop="10dp"
+        android:hint="输入手机号"
+        android:inputType="phone"
         android:minHeight="50dp"/>
 
     <EditText
         android:id="@+id/et_register_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:hint="输入密码"
+        android:inputType="textPassword"
         android:minHeight="50dp"/>
 
     <TextView
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/selecter_btn_white"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selecter_btn_blue"
         android:gravity="center"
         android:minHeight="50dp"
-        android:text="登录"/>
+        android:text="注册"
+        android:textColor="@android:color/white"/>
 </LinearLayout>

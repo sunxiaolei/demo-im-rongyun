@@ -4,15 +4,13 @@ package sunxl8.android_lib.base;
 import android.os.Bundle;
 import android.view.View;
 
-import com.trello.rxlifecycle.components.RxActivity;
-
 import sunxl8.android_lib.widget.swipeback.SwipeBackActivityBase;
 import sunxl8.android_lib.widget.swipeback.SwipeBackActivityHelper;
 import sunxl8.android_lib.widget.swipeback.SwipeBackLayout;
 import sunxl8.android_lib.widget.swipeback.Utils;
 
 
-public abstract class BaseSwipeBackActivity extends RxActivity implements SwipeBackActivityBase {
+public abstract class BaseSwipeBackActivity extends BaseActivity implements SwipeBackActivityBase {
 
     private SwipeBackActivityHelper mHelper;
 
@@ -21,19 +19,7 @@ public abstract class BaseSwipeBackActivity extends RxActivity implements SwipeB
         super.onCreate(savedInstanceState);
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
-        setContentViewId();
-        init();
-        initView();
-        initData();
     }
-
-    protected abstract int setContentViewId();
-
-    protected abstract void init();
-
-    protected abstract void initView();
-
-    protected abstract void initData();
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

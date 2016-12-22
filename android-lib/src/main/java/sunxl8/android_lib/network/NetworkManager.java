@@ -19,12 +19,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class NetworkManager {
-    private static Retrofit commonClient;
 
-    public static Retrofit getCommonClient() {
+    private static Retrofit commonClient;
+    private static Retrofit.Builder commonBuilder;
+    private static String lastUrl;
+
+    public static Retrofit getCommonClient(String baseUrl) {
         if (commonClient == null) {
+            lastUrl = baseUrl;
             commonClient = new Retrofit.Builder()
-                    .baseUrl(NetworkConstant.URL_BASE)
+                    .baseUrl(baseUrl)
+                    .client(getHttpClient())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        } else if (!lastUrl.equals(baseUrl)) {
+            commonClient = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
                     .client(getHttpClient())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())

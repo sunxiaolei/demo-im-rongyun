@@ -23,10 +23,10 @@ public class MainActivity extends ImBaseActivity {
     @Override
     protected void initView() {
         tabNavigation.setTabMode(TabLayout.MODE_FIXED);
-        tabNavigation.addTab(tabNavigation.newTab().setText("weixin").setIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        tabNavigation.addTab(tabNavigation.newTab().setText("weixin2"));
-        tabNavigation.addTab(tabNavigation.newTab().setText("weixin3"));
-        tabNavigation.addTab(tabNavigation.newTab().setText("weixin4"));
+        String[] titles = {"会话", "联系人", "发现", "我"};
+        for (int i = 0; i < titles.length; i++) {
+            tabNavigation.addTab(tabNavigation.newTab().setText(titles[i]).setIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
+        }
     }
 
     @Override
