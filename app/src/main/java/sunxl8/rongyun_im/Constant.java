@@ -14,4 +14,7 @@ public class Constant {
     public static final String SP_USER_ACCOUNT_KEY = "sp_user_account";
     public static final String SP_USER_PWD_KEY = "sp_user_pwd";
 
+    public static final String SP_SET = "sp_set";
+    public static final String SP_SET_MESSAGE_KEY = "sp_set_message";
+
 }

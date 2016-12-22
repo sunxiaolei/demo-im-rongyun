@@ -9,10 +9,13 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
+import rx.functions.Action1;
+import sunxl8.android_lib.utils.RxBus;
 import sunxl8.android_lib.utils.SPUtils;
 import sunxl8.rongyun_im.Constant;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseActivity;
+import sunxl8.rongyun_im.event.DestroySplashEvent;
 
 /**
  * Created by sunxl8 on 2016/12/21.
@@ -47,6 +50,11 @@ public class SplashActivity extends ImBaseActivity {
                     //start register activity
                     Intent intent = new Intent(SplashActivity.this, RegisterActivity.class);
                     startActivity(intent);
+                });
+        RxBus.getInstance().onEvent(DestroySplashEvent.class)
+                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(event -> {
+                    finish();
                 });
     }
 

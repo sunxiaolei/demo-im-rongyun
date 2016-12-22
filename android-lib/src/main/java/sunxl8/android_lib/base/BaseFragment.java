@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle.components.RxFragment;
+
 
 /**
  * Created by sunxl8 on 2016/12/21.
@@ -19,17 +20,17 @@ public abstract class BaseFragment extends RxFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(setContentViewId(), container, false);
-        init();
+        init(view);
         initView();
         initData();
         return view;
     }
 
-    public abstract int setContentViewId();
+    protected abstract int setContentViewId();
 
-    public abstract void init();
+    protected abstract void init(View view);
 
-    public abstract void initView();
+    protected abstract void initView();
 
-    public abstract void initData();
+    protected abstract void initData();
 }

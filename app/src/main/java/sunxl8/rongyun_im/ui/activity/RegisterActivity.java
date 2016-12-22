@@ -1,5 +1,6 @@
 package sunxl8.rongyun_im.ui.activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,10 +15,12 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import rx.Subscriber;
 import sunxl8.android_lib.utils.RegexUtils;
+import sunxl8.android_lib.utils.RxBus;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseSwipeBackActivity;
 import sunxl8.rongyun_im.entity.RegisterEntityRequest;
 import sunxl8.rongyun_im.entity.RegisterEntityResponse;
+import sunxl8.rongyun_im.event.DestroySplashEvent;
 import sunxl8.rongyun_im.network.LeanCloudRequest;
 
 /**
@@ -106,7 +109,9 @@ public class RegisterActivity extends ImBaseSwipeBackActivity {
                     @Override
                     public void onNext(RegisterEntityResponse response) {
                         dismissDialog();
-                        showDialog(response.toString());
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        RxBus.getInstance().post(new DestroySplashEvent());
                     }
                 });
     }

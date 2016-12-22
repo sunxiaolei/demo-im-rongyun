@@ -8,8 +8,10 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
+import sunxl8.android_lib.utils.RxBus;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseActivity;
+import sunxl8.rongyun_im.event.DestroySplashEvent;
 
 /**
  * Created by sunxl8 on 2016/12/21.
@@ -37,6 +39,8 @@ public class LoginActivity extends ImBaseActivity {
                     //success
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
+                    RxBus.getInstance().post(new DestroySplashEvent());
                 });
 
     }
