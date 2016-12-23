@@ -10,12 +10,18 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
 import rx.functions.Action1;
+import sunxl8.android_lib.network.NetworkManager;
 import sunxl8.android_lib.utils.RxBus;
 import sunxl8.android_lib.utils.SPUtils;
 import sunxl8.rongyun_im.Constant;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseActivity;
+import sunxl8.rongyun_im.entity.LeanCloudException;
+import sunxl8.rongyun_im.entity.LoginEntityRequest;
+import sunxl8.rongyun_im.entity.LoginEntityResponse;
 import sunxl8.rongyun_im.event.DestroySplashEvent;
+import sunxl8.rongyun_im.network.LeanCloudExceptionEngine;
+import sunxl8.rongyun_im.network.LeanCloudRequest;
 
 /**
  * Created by sunxl8 on 2016/12/21.
@@ -61,8 +67,23 @@ public class SplashActivity extends ImBaseActivity {
     @Override
     public void initData() {
         SPUtils sp = new SPUtils(this, Constant.SP_USER);
-        if (sp.getString(Constant.SP_USER_ACCOUNT_KEY) != null) {
+        if (sp.getString(Constant.SP_USER_ACCOUNT_KEY) != null && sp.getString(Constant.SP_USER_PWD_KEY) != null) {
             //do login
+            LoginEntityRequest request = new LoginEntityRequest();
+            request.setUsername(sp.getString(Constant.SP_USER_ACCOUNT_KEY));
+            request.setPassword(sp.getString(Constant.SP_USER_PWD_KEY));
+            LeanCloudRequest.doLogin(request)
+                    .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                    .subscribe(response -> {
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }, new LeanCloudExceptionEngine() {
+                        @Override
+                        public void call(LeanCloudException entity) {
+                            layoutBtn.setVisibility(View.VISIBLE);
+                        }
+                    });
         } else {
             layoutBtn.setVisibility(View.VISIBLE);
         }

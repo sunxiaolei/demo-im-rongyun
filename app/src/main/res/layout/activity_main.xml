@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorWhite"
-        app:tabIndicatorHeight="0dp"/>
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/colorFontPrimary"
+        app:tabTextColor="@color/colorFontSecond"/>
 
     <FrameLayout
         android:id="@+id/layout_main_container"

@@ -5,11 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/header"
+        layout="@layout/view_header"/>
+
     <RelativeLayout
         android:id="@+id/layout_mine_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:background="@drawable/selecter_btn_white"
         android:minHeight="50dp"
         android:paddingLeft="20dp"

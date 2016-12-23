@@ -10,13 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.RxActivity;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 
 /**
  * Created by sunxl8 on 2016/12/21.
  */
 
-public abstract class BaseActivity extends RxActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     private ProgressDialog dialogLoading;
     private AlertDialog dialog;

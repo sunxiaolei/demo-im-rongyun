@@ -91,20 +91,18 @@ public class RegisterActivity extends ImBaseSwipeBackActivity {
         }
         showLoading();
         RegisterEntityRequest entityRequest = new RegisterEntityRequest();
-        entityRequest.setUsername(nickname);
+        entityRequest.setNickname(nickname);
+        entityRequest.setUsername(accountname);
         entityRequest.setPhone(accountname);
         entityRequest.setPassword(password);
         LeanCloudRequest.doRegister(entityRequest)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new Action1<RegisterEntityResponse>() {
-                    @Override
-                    public void call(RegisterEntityResponse response) {
-                        dismissDialog();
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        RxBus.getInstance().post(new DestroySplashEvent());
-                        finish();
-                    }
+                .subscribe(response -> {
+                    dismissDialog();
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    RxBus.getInstance().post(new DestroySplashEvent());
+                    finish();
                 }, new LeanCloudExceptionEngine() {
                     @Override
                     public void call(LeanCloudException entity) {

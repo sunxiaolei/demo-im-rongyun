@@ -7,14 +7,24 @@ package sunxl8.rongyun_im.entity;
 public class RegisterEntityRequest {
 
     /**
-     * username : hjiang
+     * nickname : jack
+     * username : 18612340000
      * password : f32@ds*@&dsa
      * phone : 18612340000
      */
 
+    private String nickname;
     private String username;
     private String password;
     private String phone;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getUsername() {
         return username;

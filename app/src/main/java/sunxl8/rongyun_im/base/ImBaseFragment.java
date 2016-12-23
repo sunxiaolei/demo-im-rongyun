@@ -1,8 +1,10 @@
 package sunxl8.rongyun_im.base;
 
+import android.content.Context;
 import android.view.View;
 
 import butterknife.ButterKnife;
+import sunxl8.android_lib.base.BaseActivity;
 import sunxl8.android_lib.base.BaseFragment;
 
 /**
@@ -11,9 +13,12 @@ import sunxl8.android_lib.base.BaseFragment;
 
 public abstract class ImBaseFragment extends BaseFragment{
 
+    protected BaseActivity mActivity;
+
     @Override
     protected void init(View view) {
         ButterKnife.bind(this, view);
+        mActivity = (BaseActivity) getActivity();
     }
     
 }

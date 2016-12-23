@@ -1,7 +1,9 @@
 package sunxl8.rongyun_im.ui.fragment;
 
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.FragmentEvent;
@@ -17,6 +19,10 @@ import sunxl8.rongyun_im.ui.activity.SetActivity;
 
 public class MineFragment extends ImBaseFragment {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_toolbar_title)
+    TextView tvTitle;
     @BindView(R.id.layout_mine_set)
     RelativeLayout layoutSet;
 
@@ -27,6 +33,9 @@ public class MineFragment extends ImBaseFragment {
 
     @Override
     protected void initView() {
+        mActivity.setSupportActionBar(toolbar);
+        mActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitle.setText("Talk Talk");
         RxView.clicks(layoutSet)
                 .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(aVoid -> {

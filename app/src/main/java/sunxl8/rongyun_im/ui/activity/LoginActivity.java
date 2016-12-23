@@ -13,6 +13,8 @@ import butterknife.BindView;
 import rx.functions.Action1;
 import sunxl8.android_lib.utils.RegexUtils;
 import sunxl8.android_lib.utils.RxBus;
+import sunxl8.android_lib.utils.SPUtils;
+import sunxl8.rongyun_im.Constant;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseSwipeBackActivity;
 import sunxl8.rongyun_im.entity.LeanCloudException;
@@ -75,7 +77,7 @@ public class LoginActivity extends ImBaseSwipeBackActivity {
     protected void initData() {
     }
 
-    private void doLogin(String account, String passord) {
+    private void doLogin(String account, String password) {
         if (!RegexUtils.isMobileSimple(etAccount.getText().toString())) {
             showToast("请输入正确手机号码");
             return;
@@ -83,11 +85,14 @@ public class LoginActivity extends ImBaseSwipeBackActivity {
         showLoading();
         LoginEntityRequest request = new LoginEntityRequest();
         request.setUsername(account);
-        request.setPassword(passord);
+        request.setPassword(password);
         LeanCloudRequest.doLogin(request)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(response -> {
                     dismissDialog();
+                    SPUtils sp = new SPUtils(this, Constant.SP_USER);
+                    sp.putString(Constant.SP_USER_ACCOUNT_KEY, account);
+                    sp.putString(Constant.SP_USER_PWD_KEY, password);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     RxBus.getInstance().post(new DestroySplashEvent());

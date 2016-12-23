@@ -3,14 +3,19 @@ package sunxl8.rongyun_im.ui.activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.support.design.widget.TabLayout;
+import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding.support.design.widget.RxTabLayout;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
+import rx.functions.Action1;
+import sunxl8.android_lib.utils.RxBus;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseActivity;
+import sunxl8.rongyun_im.event.DestroyMainEvent;
 import sunxl8.rongyun_im.ui.fragment.MineFragment;
 
 public class MainActivity extends ImBaseActivity {
@@ -42,6 +47,11 @@ public class MainActivity extends ImBaseActivity {
                     Fragment fragment = getFragment(tab.getPosition());
                     transaction.replace(R.id.layout_main_container, fragment);
                     transaction.commit();
+                });
+        RxBus.getInstance().onEvent(DestroyMainEvent.class)
+                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(event -> {
+                    finish();
                 });
     }
 

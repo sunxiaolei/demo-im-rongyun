@@ -11,4 +11,14 @@
 
     <color name="colorBlue">#03A9F4</color>
     <color name="colorBlueSelected">#303F9F</color>
+
+    <color name="colorRed">#FF0000</color>
+    <color name="colorRedSelected">#FF5588</color>
+
+
+    <color name="colorBgPrimary">#EEEEEE</color>
+
+
+    <color name="colorFontPrimary">#333333</color>
+    <color name="colorFontSecond">#999999</color>
 </resources>
