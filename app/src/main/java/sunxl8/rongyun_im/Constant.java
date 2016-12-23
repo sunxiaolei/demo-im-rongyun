@@ -10,6 +10,10 @@ public class Constant {
     public static final String LEAN_CLOUD_ID = "qVSYnTWFJ9TlcsqABFpAFpHG-gzGzoHsz";
     public static final String LEAN_CLOUD_KEY = "QJcyshJMqPWXKRBqkXSNLwe1";
 
+    public static final String BASE_URL_RONGCLOUD = "http://api.cn.ronghub.com/";
+    public static final String RONG_CLOUD_KEY = "8w7jv4qb8fuyy";
+    public static final String RONG_CLOUD_SECRET = "kirwjqPwECWq";
+
     public static final String SP_USER = "sp_user";
     public static final String SP_USER_ACCOUNT_KEY = "sp_user_account";
     public static final String SP_USER_PWD_KEY = "sp_user_pwd";

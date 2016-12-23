@@ -22,6 +22,7 @@ public class LoginEntityResponse {
     private String phone;
     private String objectId;
     private String username;
+    private String nickname;
     private String createdAt;
     private boolean emailVerified;
     private boolean mobilePhoneVerified;
@@ -64,6 +65,14 @@ public class LoginEntityResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getCreatedAt() {

@@ -8,9 +8,11 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import rx.functions.Action1;
-import sunxl8.android_lib.network.NetworkManager;
 import sunxl8.android_lib.utils.RxBus;
 import sunxl8.android_lib.utils.SPUtils;
 import sunxl8.rongyun_im.Constant;
@@ -22,6 +24,7 @@ import sunxl8.rongyun_im.entity.LoginEntityResponse;
 import sunxl8.rongyun_im.event.DestroySplashEvent;
 import sunxl8.rongyun_im.network.LeanCloudExceptionEngine;
 import sunxl8.rongyun_im.network.LeanCloudRequest;
+import sunxl8.rongyun_im.network.RongCloudRequest;
 
 /**
  * Created by sunxl8 on 2016/12/21.
@@ -75,9 +78,7 @@ public class SplashActivity extends ImBaseActivity {
             LeanCloudRequest.doLogin(request)
                     .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                     .subscribe(response -> {
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        doGetToken(response);
                     }, new LeanCloudExceptionEngine() {
                         @Override
                         public void call(LeanCloudException entity) {
@@ -87,6 +88,25 @@ public class SplashActivity extends ImBaseActivity {
         } else {
             layoutBtn.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void doGetToken(LoginEntityResponse response) {
+        Map<String, String> params = new HashMap<>();
+        params.put("userId", response.getUsername());
+        params.put("name", response.getNickname());
+        params.put("portraitUri", "");
+        RongCloudRequest.doGetToken(params)
+                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(response1 -> {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.toString();
+                    }
+                });
     }
 
 }
