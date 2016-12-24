@@ -16,6 +16,7 @@ import sunxl8.android_lib.utils.RxBus;
 import sunxl8.android_lib.utils.SPUtils;
 import sunxl8.rongyun_im.Constant;
 import sunxl8.rongyun_im.R;
+import sunxl8.rongyun_im.base.ImApplication;
 import sunxl8.rongyun_im.base.ImBaseSwipeBackActivity;
 import sunxl8.rongyun_im.entity.LeanCloudException;
 import sunxl8.rongyun_im.entity.LoginEntityRequest;
@@ -93,6 +94,10 @@ public class LoginActivity extends ImBaseSwipeBackActivity {
                     SPUtils sp = new SPUtils(this, Constant.SP_USER);
                     sp.putString(Constant.SP_USER_ACCOUNT_KEY, account);
                     sp.putString(Constant.SP_USER_PWD_KEY, password);
+                    sp.putString(Constant.SP_USER_NICKNAME_KEY, response.getNickname());
+                    ImApplication.isUserLogin = true;
+                    ImApplication.lcToken = response.getSessionToken();
+                    ImApplication.userNickName = response.getNickname();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     RxBus.getInstance().post(new DestroySplashEvent());

@@ -3,6 +3,8 @@ package sunxl8.rongyun_im.network;
 
 import java.util.Map;
 
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -18,6 +20,7 @@ public interface RongCloudApi {
     // 获取token
     ///////////////////////////////////////////////////////////////////////////
     @POST("user/getToken.json")
-    Observable<GetTokenEntityResponse> doGetToken(@QueryMap Map<String, String> params);
+    @FormUrlEncoded
+    Observable<GetTokenEntityResponse> doGetToken(@FieldMap Map<String, String> params);
 
 }

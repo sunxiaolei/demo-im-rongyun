@@ -14,6 +14,10 @@ import sunxl8.rongyun_im.Constant;
 
 public class ImApplication extends BaseApplication {
 
+    public static boolean isUserLogin = false;
+    public static String userNickName;
+    public static String lcToken;
+
     @Override
     public void onCreate() {
         super.onCreate();
