@@ -88,7 +88,6 @@ public class SplashActivity extends ImBaseActivity {
                         //不支持客户端直接获取token...
 //                        doGetToken(response);
                         connect(Constant.TEST_TOKEN);
-
                     }, new LeanCloudExceptionEngine() {
                         @Override
                         public void call(LeanCloudException entity) {
@@ -130,12 +129,9 @@ public class SplashActivity extends ImBaseActivity {
          */
         RongIMClient.connect(token, new RongIMClient.ConnectCallback() {
 
-            /**
-             * Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token
-             */
             @Override
             public void onTokenIncorrect() {
-                Log.d("LoginActivity", "--onTokenIncorrect");
+                showDialog("Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token");
             }
 
             /**
@@ -157,7 +153,7 @@ public class SplashActivity extends ImBaseActivity {
              */
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
-                Log.d("LoginActivity", "--onError" + errorCode);
+                showDialog("连接融云失败 error code:" + errorCode);
             }
         });
     }

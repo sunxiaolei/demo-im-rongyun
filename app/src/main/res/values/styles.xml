@@ -12,4 +12,8 @@
         <item name="android:textColorPrimary">@color/colorFontPrimary</item>
     </style>
 
+    <style name="NavigationTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

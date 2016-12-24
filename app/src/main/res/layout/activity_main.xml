@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -15,13 +14,14 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorWhite"
         app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/colorFontPrimary"
-        app:tabTextColor="@color/colorFontSecond"/>
+        app:tabSelectedTextColor="@color/colorFontGreen"
+        app:tabTextAppearance="@style/NavigationTabLayoutTextAppearance"
+        app:tabTextColor="@color/colorFontSecond" />
 
     <FrameLayout
         android:id="@+id/layout_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tab_main_navigation"/>
+        android:layout_above="@id/tab_main_navigation" />
 
 </RelativeLayout>

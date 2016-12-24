@@ -2,6 +2,7 @@ package sunxl8.rongyun_im.ui.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import butterknife.BindView;
+import io.rong.imlib.RongIMClient;
 import rx.functions.Action1;
 import sunxl8.android_lib.utils.RegexUtils;
 import sunxl8.android_lib.utils.RxBus;
@@ -95,13 +97,9 @@ public class LoginActivity extends ImBaseSwipeBackActivity {
                     sp.putString(Constant.SP_USER_ACCOUNT_KEY, account);
                     sp.putString(Constant.SP_USER_PWD_KEY, password);
                     sp.putString(Constant.SP_USER_NICKNAME_KEY, response.getNickname());
-                    ImApplication.isUserLogin = true;
                     ImApplication.lcToken = response.getSessionToken();
                     ImApplication.userNickName = response.getNickname();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    RxBus.getInstance().post(new DestroySplashEvent());
-                    finish();
+                    connect(Constant.TEST_TOKEN);
                 }, new LeanCloudExceptionEngine() {
                     @Override
                     public void call(LeanCloudException entity) {
@@ -109,6 +107,48 @@ public class LoginActivity extends ImBaseSwipeBackActivity {
                         showDialog(entity.getError());
                     }
                 });
+    }
+
+    /**
+     * 建立与融云服务器的连接
+     *
+     * @param token
+     */
+    private void connect(String token) {
+
+        /**
+         * IMKit SDK调用第二步,建立与服务器的连接
+         */
+        RongIMClient.connect(token, new RongIMClient.ConnectCallback() {
+
+            @Override
+            public void onTokenIncorrect() {
+                showDialog("Token 错误，在线上环境下主要是因为 Token 已经过期，您需要向 App Server 重新请求一个新的 Token");
+            }
+
+            /**
+             * 连接融云成功
+             * @param userid 当前 token
+             */
+            @Override
+            public void onSuccess(String userid) {
+                Log.d("LoginActivity", "--onSuccess---" + userid);
+                ImApplication.isUserLogin = true;
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                RxBus.getInstance().post(new DestroySplashEvent());
+                finish();
+            }
+
+            /**
+             * 连接融云失败
+             * @param errorCode 错误码，可到官网 查看错误码对应的注释
+             */
+            @Override
+            public void onError(RongIMClient.ErrorCode errorCode) {
+                showDialog("连接融云失败 error code:" + errorCode);
+            }
+        });
     }
 
 }

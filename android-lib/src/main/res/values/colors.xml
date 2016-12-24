@@ -21,4 +21,7 @@
 
     <color name="colorFontPrimary">#333333</color>
     <color name="colorFontSecond">#999999</color>
+
+    <color name="colorFontWhite">#EEEEEE</color>
+    <color name="colorFontGreen">#12C700</color>
 </resources>
