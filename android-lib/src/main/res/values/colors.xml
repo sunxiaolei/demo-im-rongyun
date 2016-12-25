@@ -12,6 +12,9 @@
     <color name="colorBlue">#03A9F4</color>
     <color name="colorBlueSelected">#303F9F</color>
 
+    <color name="colorGreen">#12C700</color>
+    <color name="colorGreenSelected">#33691E</color>
+
     <color name="colorRed">#FF0000</color>
     <color name="colorRedSelected">#FF5588</color>
 

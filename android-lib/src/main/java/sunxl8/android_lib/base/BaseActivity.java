@@ -1,15 +1,12 @@
 package sunxl8.android_lib.base;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.trello.rxlifecycle.components.RxActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 

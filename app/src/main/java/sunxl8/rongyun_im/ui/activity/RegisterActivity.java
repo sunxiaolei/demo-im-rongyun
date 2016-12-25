@@ -49,6 +49,7 @@ public class RegisterActivity extends ImBaseSwipeBackActivity {
 
     @Override
     protected void initView() {
+        toolbarTitle.setText("注册");
         RxTextView.afterTextChangeEvents(etNickname)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(event -> {

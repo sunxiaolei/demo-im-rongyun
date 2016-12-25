@@ -47,6 +47,7 @@ public class LoginActivity extends ImBaseSwipeBackActivity {
 
     @Override
     protected void initView() {
+        toolbarTitle.setText("登录");
         RxTextView.afterTextChangeEvents(etAccount)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(event -> {
