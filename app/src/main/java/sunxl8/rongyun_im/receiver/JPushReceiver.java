@@ -1,10 +1,13 @@
 package sunxl8.rongyun_im.receiver;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
@@ -20,9 +23,11 @@ public class JPushReceiver extends BroadcastReceiver {
     private static final String TAG = "JPushReceiver";
 
     private NotificationManager nm;
+    private Context mContext;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        this.mContext = context;
         if (nm == null) {
             nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
@@ -32,18 +37,7 @@ public class JPushReceiver extends BroadcastReceiver {
             Logger.t(TAG).d(bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID));
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Logger.t(TAG).d("接受到推送下来的自定义消息");
-            String title = bundle.getString(JPushInterface.EXTRA_TITLE);
-            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            String type = bundle.getString(JPushInterface.EXTRA_CONTENT_TYPE);
-            String file = bundle.getString(JPushInterface.EXTRA_RICHPUSH_FILE_PATH);
-            String msgId = bundle.getString(JPushInterface.EXTRA_MSG_ID);
-            Logger.t(TAG).d("title->" + title + "\r\n"
-                    + "message->" + message + "\r\n"
-                    + "extras->" + extras + "\r\n"
-                    + "type->" + type + "\r\n"
-                    + "msgId->" + msgId + "\r\n"
-                    + "file->" + file);
+            handleMessage(bundle);
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Logger.d("接受到推送下来的通知");
             String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
@@ -82,4 +76,21 @@ public class JPushReceiver extends BroadcastReceiver {
             Logger.t(TAG).d("Unhandled intent - " + intent.getAction());
         }
     }
+
+    private void handleMessage(Bundle bundle) {
+        String title = bundle.getString(JPushInterface.EXTRA_TITLE);
+        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        String type = bundle.getString(JPushInterface.EXTRA_CONTENT_TYPE);
+        String file = bundle.getString(JPushInterface.EXTRA_RICHPUSH_FILE_PATH);
+        String msgId = bundle.getString(JPushInterface.EXTRA_MSG_ID);
+        Logger.t(TAG).d("title->" + title + "\r\n"
+                + "message->" + message + "\r\n"
+                + "extras->" + extras + "\r\n"
+                + "type->" + type + "\r\n"
+                + "msgId->" + msgId + "\r\n"
+                + "file->" + file);
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
 }

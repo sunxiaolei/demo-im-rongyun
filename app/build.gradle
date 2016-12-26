@@ -49,5 +49,5 @@ dependencies {
     compile project(':android-lib')
     //Jpush
     compile 'cn.jiguang.sdk:jpush:3.0.0'
-    compile 'cn.jiguang.sdk:jcore:1.0.0' 
+    compile 'cn.jiguang.sdk:jcore:1.0.0'
 }

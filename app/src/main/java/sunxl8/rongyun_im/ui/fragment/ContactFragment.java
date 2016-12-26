@@ -1,16 +1,20 @@
 package sunxl8.rongyun_im.ui.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.FragmentEvent;
 
+import butterknife.BindView;
 import rx.functions.Action1;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseFragment;
+import sunxl8.rongyun_im.ui.activity.ChatActivity;
 import sunxl8.rongyun_im.widget.AddPopupWindow;
 
 /**
@@ -21,6 +25,9 @@ import sunxl8.rongyun_im.widget.AddPopupWindow;
  */
 
 public class ContactFragment extends ImBaseFragment {
+
+    @BindView(R.id.tv_test_contact)
+    TextView tvContact;
 
     @Override
     protected int setContentViewId() {
@@ -35,6 +42,14 @@ public class ContactFragment extends ImBaseFragment {
                 .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(aVoid -> {
                     showPopupwindow();
+                });
+        RxView.clicks(tvContact)
+                .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        startActivity(new Intent(mActivity, ChatActivity.class));
+                    }
                 });
     }
 

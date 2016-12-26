@@ -38,6 +38,9 @@
         <activity
             android:name=".ui.activity.AddContactActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ChatActivity"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".receiver.JPushReceiver">
             <intent-filter>
