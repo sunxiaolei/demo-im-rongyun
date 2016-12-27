@@ -1,1 +1,1 @@
-include ':app', ':IMLib', ':android-lib'
+include ':app', ':IMLib', ':android-lib', ':IMKit'
