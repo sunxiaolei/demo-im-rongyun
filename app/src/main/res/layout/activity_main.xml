@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhiteBg">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhiteBg">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ToolbarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"/>
+
+        <ImageView
+            android:id="@+id/iv_toolbar_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_plus"
+            android:visibility="gone"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_main_navigation"
@@ -16,12 +41,13 @@
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@color/colorFontGreen"
         app:tabTextAppearance="@style/NavigationTabLayoutTextAppearance"
-        app:tabTextColor="@color/colorFontSecond" />
+        app:tabTextColor="@color/colorFontSecond"/>
 
     <FrameLayout
         android:id="@+id/layout_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/tab_main_navigation" />
+        android:layout_above="@id/tab_main_navigation"
+        android:layout_below="@id/toolbar"/>
 
 </RelativeLayout>

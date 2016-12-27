@@ -1,32 +1,46 @@
 package sunxl8.rongyun_im.ui.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.Activity;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.support.design.widget.RxTabLayout;
+import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle.android.FragmentEvent;
 
 import butterknife.BindView;
-import rx.functions.Action1;
+import io.rong.imkit.fragment.ConversationListFragment;
 import sunxl8.android_lib.utils.RxBus;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseActivity;
 import sunxl8.rongyun_im.event.DestroyMainEvent;
 import sunxl8.rongyun_im.ui.fragment.ContactFragment;
 import sunxl8.rongyun_im.ui.fragment.MineFragment;
+import sunxl8.rongyun_im.widget.AddPopupWindow;
 
 public class MainActivity extends ImBaseActivity {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R.id.iv_toolbar_icon)
+    ImageView toolbarPlus;
 
     @BindView(R.id.tab_main_navigation)
     TabLayout tabNavigation;
     @BindView(R.id.layout_main_container)
     FrameLayout layoutContainer;
 
-    private android.app.FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     @Override
     protected int setContentViewId() {
@@ -35,6 +49,13 @@ public class MainActivity extends ImBaseActivity {
 
     @Override
     protected void initView() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        RxView.clicks(toolbarPlus)
+                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(aVoid -> {
+                    showPopupwindow();
+                });
         tabNavigation.setTabMode(TabLayout.MODE_FIXED);
         String[] titles = {"会话", "联系人", "发现", "我"};
         int[] icons = {R.drawable.ic_navigation_conversation, R.drawable.ic_navigation_contact,
@@ -44,13 +65,14 @@ public class MainActivity extends ImBaseActivity {
         for (int i = 0; i < titles.length; i++) {
             tabNavigation.addTab(tabNavigation.newTab().setText(titles[i]).setIcon(getResources().getDrawable(icons[i])));
         }
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         RxTabLayout.selections(tabNavigation)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(tab -> {
                     for (int i = 0; i < titles.length; i++) {
                         tabNavigation.getTabAt(i).setIcon(getResources().getDrawable(icons[i]));
                     }
+                    toolbarTitle.setText(titles[tab.getPosition()]);
                     tab.setIcon(getResources().getDrawable(selectedIcons[tab.getPosition()]));
                     FragmentTransaction transaction = fragmentManager.beginTransaction();
                     Fragment fragment = getFragment(tab.getPosition());
@@ -70,11 +92,12 @@ public class MainActivity extends ImBaseActivity {
     }
 
     private Fragment getFragment(int position) {
+        ConversationListFragment conversationFragment = null;
         ContactFragment contactFragment = null;
         MineFragment mineFragment = null;
         switch (position) {
             case 0:
-                return contactFragment == null ? new ContactFragment() : contactFragment;
+                return conversationFragment == null ? new ConversationListFragment() : conversationFragment;
             case 1:
                 return contactFragment == null ? new ContactFragment() : contactFragment;
             case 2:
@@ -84,4 +107,10 @@ public class MainActivity extends ImBaseActivity {
         }
         return null;
     }
+
+    private void showPopupwindow() {
+        AddPopupWindow popupWindow = new AddPopupWindow(this);
+        popupWindow.showAsDropDown(toolbar, 0, 0, Gravity.RIGHT);
+    }
+
 }

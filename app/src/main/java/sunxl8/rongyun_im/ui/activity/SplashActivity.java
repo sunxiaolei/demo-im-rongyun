@@ -13,7 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 import rx.functions.Action1;
 import sunxl8.android_lib.utils.RxBus;
 import sunxl8.android_lib.utils.SPUtils;
@@ -127,7 +129,7 @@ public class SplashActivity extends ImBaseActivity {
         /**
          * IMKit SDK调用第二步,建立与服务器的连接
          */
-        RongIMClient.connect(token, new RongIMClient.ConnectCallback() {
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
 
             @Override
             public void onTokenIncorrect() {
@@ -142,8 +144,11 @@ public class SplashActivity extends ImBaseActivity {
             public void onSuccess(String userid) {
                 Log.d("LoginActivity", "--onSuccess---" + userid);
                 ImApplication.isUserLogin = true;
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                startActivity(intent);
+                Map<String, Boolean> supportedConversation = new HashMap<String, Boolean>();
+                supportedConversation.put(Conversation.ConversationType.PRIVATE.getName(), false);
+                RongIM.getInstance().startConversationList(SplashActivity.this, supportedConversation);
                 finish();
             }
 

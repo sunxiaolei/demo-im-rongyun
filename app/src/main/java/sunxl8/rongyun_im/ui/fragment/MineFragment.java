@@ -29,7 +29,6 @@ public class MineFragment extends ImBaseFragment {
     @Override
     protected void initView() {
 
-        toolbarTitle.setText("Talk Talk");
         RxView.clicks(layoutSet)
                 .compose(this.bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(aVoid -> {

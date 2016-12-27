@@ -3,7 +3,7 @@ package sunxl8.rongyun_im.base;
 import com.avos.avoscloud.AVOSCloud;
 
 import cn.jpush.android.api.JPushInterface;
-import io.rong.imlib.RongIMClient;
+import io.rong.imkit.RongIM;
 import sunxl8.android_lib.base.BaseApplication;
 import sunxl8.android_lib.utils.AndroidUtils;
 import sunxl8.rongyun_im.Constant;
@@ -31,7 +31,7 @@ public class ImApplication extends BaseApplication {
          */
         if (getApplicationInfo().packageName.equals(AndroidUtils.getCurProcessName(getApplicationContext())) ||
                 "io.rong.push".equals(AndroidUtils.getCurProcessName(getApplicationContext()))) {
-            RongIMClient.init(this);
+            RongIM.init(this);
         }
     }
 }
