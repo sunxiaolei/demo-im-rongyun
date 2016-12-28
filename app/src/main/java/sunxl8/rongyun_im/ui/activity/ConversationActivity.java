@@ -1,5 +1,7 @@
 package sunxl8.rongyun_im.ui.activity;
 
+import android.view.View;
+
 import sunxl8.android_lib.base.BaseSwipeBackActivity;
 import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseSwipeBackActivity;

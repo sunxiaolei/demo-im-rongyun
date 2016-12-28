@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -97,12 +98,16 @@ public class MainActivity extends ImBaseActivity {
         MineFragment mineFragment = null;
         switch (position) {
             case 0:
+                toolbarPlus.setVisibility(View.VISIBLE);
                 return conversationFragment == null ? new ConversationListFragment() : conversationFragment;
             case 1:
+                toolbarPlus.setVisibility(View.VISIBLE);
                 return contactFragment == null ? new ContactFragment() : contactFragment;
             case 2:
+                toolbarPlus.setVisibility(View.GONE);
                 return contactFragment == null ? new ContactFragment() : contactFragment;
             case 3:
+                toolbarPlus.setVisibility(View.GONE);
                 return mineFragment == null ? new MineFragment() : mineFragment;
         }
         return null;

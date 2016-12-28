@@ -13,14 +13,12 @@ import com.trello.rxlifecycle.android.ActivityEvent;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import rx.functions.Action1;
 import sunxl8.android_lib.utils.RegexUtils;
 import sunxl8.android_lib.utils.RxBus;
 import sunxl8.rongyun_im.R;
-import sunxl8.rongyun_im.base.ImBaseSwipeBackActivity;
+import sunxl8.rongyun_im.base.ImBaseActivity;
 import sunxl8.rongyun_im.entity.LeanCloudException;
 import sunxl8.rongyun_im.entity.RegisterEntityRequest;
-import sunxl8.rongyun_im.entity.RegisterEntityResponse;
 import sunxl8.rongyun_im.event.DestroySplashEvent;
 import sunxl8.rongyun_im.network.LeanCloudExceptionEngine;
 import sunxl8.rongyun_im.network.LeanCloudRequest;
@@ -29,7 +27,7 @@ import sunxl8.rongyun_im.network.LeanCloudRequest;
  * Created by sunxl8 on 2016/12/21.
  */
 
-public class RegisterActivity extends ImBaseSwipeBackActivity {
+public class RegisterActivity extends ImBaseActivity {
 
     @BindView(R.id.et_register_nickname)
     EditText etNickname;

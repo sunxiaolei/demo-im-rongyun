@@ -35,6 +35,8 @@ public abstract class ImBaseSwipeBackActivity extends BaseSwipeBackActivity {
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setNavigationOnClickListener(view -> finish());
         }
     }
 

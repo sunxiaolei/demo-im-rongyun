@@ -16,8 +16,8 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
-        <item name="background">?attr/actionBarItemBackground</item>
+    <style name="ToolbarTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorControlNormal">?attr/colorControlNormal</item>
     </style>
 
 </resources>
