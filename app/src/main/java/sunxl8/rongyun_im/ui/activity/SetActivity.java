@@ -28,10 +28,6 @@ import sunxl8.rongyun_im.event.DestroySplashEvent;
 
 public class SetActivity extends ImBaseSwipeBackActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.tv_toolbar_title)
-    TextView tvTitle;
     @BindView(R.id.switch_set_message)
     Switch switchMessage;
     @BindView(R.id.layout_set_logout)
@@ -46,10 +42,7 @@ public class SetActivity extends ImBaseSwipeBackActivity {
 
     @Override
     protected void initView() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        tvTitle.setText("设置");
+        toolbarTitle.setText("设置");
         sp = new SPUtils(this, Constant.SP_SET);
         boolean status = sp.getBoolean(Constant.SP_SET_MESSAGE_KEY, true);
         switchMessage.setChecked(status);

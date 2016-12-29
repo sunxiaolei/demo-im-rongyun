@@ -1,6 +1,5 @@
 package sunxl8.rongyun_im.ui.activity;
 
-import android.app.Activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding.support.design.widget.RxTabLayout;
 import com.jakewharton.rxbinding.view.RxView;
 import com.trello.rxlifecycle.android.ActivityEvent;
-import com.trello.rxlifecycle.android.FragmentEvent;
 
 import butterknife.BindView;
 import io.rong.imkit.fragment.ConversationListFragment;
@@ -24,6 +22,7 @@ import sunxl8.rongyun_im.R;
 import sunxl8.rongyun_im.base.ImBaseActivity;
 import sunxl8.rongyun_im.event.DestroyMainEvent;
 import sunxl8.rongyun_im.ui.fragment.ContactFragment;
+import sunxl8.rongyun_im.ui.fragment.FindFragment;
 import sunxl8.rongyun_im.ui.fragment.MineFragment;
 import sunxl8.rongyun_im.widget.AddPopupWindow;
 
@@ -95,6 +94,7 @@ public class MainActivity extends ImBaseActivity {
     private Fragment getFragment(int position) {
         ConversationListFragment conversationFragment = null;
         ContactFragment contactFragment = null;
+        FindFragment findFragment = null;
         MineFragment mineFragment = null;
         switch (position) {
             case 0:
@@ -105,7 +105,7 @@ public class MainActivity extends ImBaseActivity {
                 return contactFragment == null ? new ContactFragment() : contactFragment;
             case 2:
                 toolbarPlus.setVisibility(View.GONE);
-                return contactFragment == null ? new ContactFragment() : contactFragment;
+                return findFragment == null ? new FindFragment() : findFragment;
             case 3:
                 toolbarPlus.setVisibility(View.GONE);
                 return mineFragment == null ? new MineFragment() : mineFragment;
